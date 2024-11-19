@@ -184,7 +184,7 @@ from compute_persistence import run_persistence
 metrics = run_persistence(df)
 ```
 
-Let's take a look at those genes with the highest CoSS scores
+The CoSS is a measure of the amount of spatial structure in a gene's expression patter. Let's take a look at those genes with the highest CoSS scores:
 
 
 ```python
@@ -319,9 +319,11 @@ plot_many_genes(df, list(metrics.gene)[:20])
 
 We can see that PersiST effectively surfaces those genes with notable spatial structure.
 
-From the CoSS scores PersiST automatically calles genes as SV or not (this is the 'svg' column in the results). Once the data set has been reduced to the comparatively small number of genes PersiST typically calls as SV, in our experience simple clustering methods, such as hierarchical clustering, were effective to pick out groups of co-expressed SVGs.
+From the CoSS scores PersiST automatically calles genes as spatially variable or not (this is the 'svg' column in the results). This provides a triaged list of genes that can be subjected to further analysis. 
 
-Here is such a group of genes all expressed in the glomeruli of this particular sample [2].
+For example, one can search for genes with spatially similar expression patterns. Reducing to the comparatively small number of genes PersiST typically calls as SV makes this task much easier, in our experience simple clustering methods, such as hierarchical clustering, were effective to pick out groups of co-expressed SVGs.
+
+For example, here is group of genes all expressed in the glomeruli of this particular sample [2]. This group was obtained by running simple hierarchichal clustering on the list of SVGs identified by PersiST and manually inspecting the results.
 
 
 ```python
