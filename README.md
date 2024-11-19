@@ -2,7 +2,7 @@
 
 # PersiST
 
-PersiST is an exploratory method for analysing spatial transcriptomics (and other spatial 'omics) datsets. Given a spatial transcriptomics data set containing expression data on multiple genes resolved to a shared set of co-ordinates, PerisST computes a single score for each gene that measures the amount of spatial structure that gene shows in it's expression pattern, called the *Coefficient of Spatial Structure* (CoSS). This score can be used for multiple analytical tasks, as we show below.
+PersiST is an exploratory method for analysing spatial transcriptomics (and other 'omics) datsets. Given a spatial transcriptomics data set containing expression data on multiple genes resolved to a shared set of co-orindates, PerisST computes a single score for each gene that measures the amount of spatial structure that gene shows in it's expression pattern, called the *Coefficient of Spatial Structure* (CoSS). This score can be used for multiple analytical tasks, as we show below.
 
 # Spatially Variable Gene Identification
 
@@ -19,6 +19,19 @@ df.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -184,7 +197,7 @@ from compute_persistence import run_persistence
 metrics = run_persistence(df)
 ```
 
-The CoSS is a measure of the amount of spatial structure in a gene's expression patter. Let's take a look at those genes with the highest CoSS scores:
+The CoSS is a measure of the amount of spatial structure in a gene's expression pattern. Let's take a look at those genes with the highest CoSS scores:
 
 
 ```python
@@ -196,6 +209,19 @@ metrics.iloc[:10,:]
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -305,17 +331,23 @@ metrics.iloc[:10,:]
 
 
 
+PersiST outputs a number of quantities for each gene:
+
+- **CoSS**: The Coefficient of Spatial Structure, a continuous quantity that can serve as a proxy for the amount of spatial structure in a gene's expression.
+- **Ratio**: Roughly, this measures how much of a gene's CoSS is down to a single spatial features. Genes with a high ratio may be techinical artefacts, see [2] for details.
+- **gene_rank**: The rank of each gene, where gene's are ranked from highest to lowest CoSS (so a rank of 1 is give to the gene with the highest CoSS).
+- **possible_artefact**: Based on the ratio, PersiST automatically flags genes as possible artefacts [2]. We emphasise that this is only a suggestion, manual inspection should be performed before dismissing any genes.
+- **svg**: Based on the CoSS scores, PersiST automatically calls genes as spatially variable or not [2].
+
+Let's plot the expression of those genes for which the CoSS is highest (here expression is measured in counts per million).
+
 
 ```python
 from plotting_utils import plot_many_genes
 plot_many_genes(df, list(metrics.gene)[:20])
 ```
 
-
-    
 ![png](README_files/kpmp_svgs.png)
-    
-
 
 We can see that PersiST effectively surfaces those genes with notable spatial structure.
 
@@ -330,11 +362,19 @@ For example, here is group of genes all expressed in the glomeruli of this parti
 plot_many_genes(df, ['PODXL', 'PTGDS', 'IGFBP5', 'TGFBR2', 'IFI27', 'HTRA1'], numcols=3)
 ```
 
-
-    
 ![png](README_files/podxl_svgs.png)
-    
 
+# Differential Spatial Expression Testing
+
+If you are working with multiple spatial transcriptomics samples, and there are defiend subgroups present within these samples, the CoSS scores allow for some rudimentary differential spatial expression testing.
+
+In the KPMP dataset, there are Acute Kidney Infection (AKI) and Chronic Kidney Disease (CKD) samples. For each gene, we computed the average CoSS score within the AKI and CKD samples. The gene with the highest different ebtween the two was UMOD.
+
+![png](README_files/umod_comparison.png)
+
+In the AKI samples, UMOD displays well-defined regions of higher expression, whereas in the CKD samples the expression of UMOD is much more diffuse. 
+
+UMOD is a marker gene for tubles, a key structural component of the kidney. We hypothesis that this difference in expression between the AKI and CKD samples reflects the structural breakdown that is chracteristic of progressed kidney disease.
 
 # References
 
