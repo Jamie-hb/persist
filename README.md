@@ -4,6 +4,12 @@
 
 PersiST is an exploratory method for analysing spatial transcriptomics (and other 'omics) datsets. Given a spatial transcriptomics data set containing expression data on multiple genes resolved to a shared set of co-orindates, PerisST computes a single score for each gene that measures the amount of spatial structure that gene shows in it's expression pattern, called the *Coefficient of Spatial Structure* (CoSS). This score can be used for multiple analytical tasks, as we show below.
 
+# Installation
+
+PersiST can be installed using pip:
+
+```python3 -m pip install persist_spatial``` 
+
 # Spatially Variable Gene Identification
 
 For this tutorial, we shall be looking at spatial transcriptomics data on a sample from the Kidney Precision Medicine Project[1]. 
