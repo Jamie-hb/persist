@@ -1,17 +1,28 @@
-""" Functions related to computing a smoothed expression value. """
-
 import numpy as np
 
 # Compute the dtm from a point to the weighted empirical measure
 
-def distance_to_measure_point(weights, distances, m):
-    """ Takes in a sorted vector of weights and associated squared distances for a single point, and
-        computes the distance to measure for that point. 
-        
-        Designed to be called upon by distance_to_measure_weighted()
-        
-        - weights [n x 1 numpy.array]: Weights, sorted by distance from central vertex and normalised. 
-        - distances [n x 1 numpy.array]: Squared distances from central vertex to surrounding vertices. """
+def distance_to_measure_point(weights: np.ndarray, distances: np.ndarray, m: float) -> float:
+    """ Computes the dtm at a single point.
+    
+        Given a sorted vector of probability masses and squared distances to the neighbours of a single point,  
+        computes the distance to measure at that point. To be called on by smoothed_expression.distance_to_measure_weighted().
+
+        Parameters
+        ----------
+        weights : np.ndarray
+            Probability masses at neighbour points, pre sorted by increasing distance from central vertex. 
+        distances : np.ndarray
+            Squared distances to neighbour vertices, in increasing order.
+        m : float
+            Threshold probability mass to compute distance to. Should lie in (0,1).
+
+        Returns
+        ----------
+        float
+            Distance to measure at input point.
+            
+        """
     
     # Create indexes to sort via distance (distances will come in order of weight so this will break ties)
     indices = distances.argsort()
@@ -32,19 +43,31 @@ def distance_to_measure_point(weights, distances, m):
     return res
 
 
-# Compute the weighted dtm for all points on a mesh
+def distance_to_measure_weighted(weights: np.ndarray, dmat: np.ndarray, m: float) -> np.ndarray:
+    """ Computes the distance to measure at each point.
+    
+        Given a vector of expression weights, a well-well distance matrix, and an ordered list of 
+        distances from the central vertex in a radial network, computes the
+        distance to measure at each vertex. Designed to be called upon by compute_persistence.run_persistence()
 
-def distance_to_measure_weighted(weights, dmat, m):
-    """ Takes in a vector of expression weights, a well-well distance matrix, and an ordered list of 
-        distances from the central vertex in a radial network, and computes the associated
-        distance to measure for each vertex. 
-        
-        Designed to be called upon by run_persistence()
-        
-        - weights [n x 1 numpy.array]: Expression in each well, should be normalised.
-        - dmat [n x n numpy.array]: Well-well distance matrix, dmat[i,j] = d(well_i, well_j).
-        - network_distances [n x 1 numpy.array]: Sorted array of discrete distances, distances[i] = d(central vertex, ith nearest other vertex).
-        - m [float in (0,1)]: Threshold. """
+        Parameters
+        ----------
+        weights : np.ndarray
+            Expression in each well, should be normalised to sum to 1. Dimensions n_wells x 1
+        dmat : np.ndarray
+            Well-well distance matrix where dmat[i,j] = d(well_i, well_j). Dimensions n_wells x n_wells
+        network_distances : np.ndarray
+             Sorted array of distances from a central well to its nearest neighbour wells, 
+             distances[i] = d(central vertex, ith nearest other vertex). Dimensions n_wells x 1.
+        m : float
+            Probability mass threshold to use in distance to measure calculations. Should lie in (0,1).
+
+        Returns
+        ----------
+        np.ndarray
+            Distance to measure at each well. Dimensions n_wells x 1.
+    
+    """
      
     # Create vector to store dtms
     res = np.zeros(dmat.shape[0])

@@ -1,39 +1,61 @@
-"""Function to compute CoSS scores for each gene in a spatial transcriptomics data set. """
-
 import numpy as np
 import pandas as pd
 import dionysus as d
 import pickle
 from scipy.sparse import csc_array
 from sklearn.preprocessing import normalize
+from typing import List
 
 from network_functions import get_distances
 from smoothed_expression import distance_to_measure_weighted
 from topology_utils import p_norm, diagram_to_array, function_filtration
 from post_ph_functions import find_knee
 
-def run_persistence(data, p=2, m=0.1, mesh_type="hexagonal", sensitivity=1, 
-                    metrics_storage_location=None, diagrams_storage_location=None, log_storage_location=None, 
-                    notes=None, return_metrics=True, return_diagrams=False):
+def run_persistence(data: pd.DataFrame, p: int =2, m: float =0.1, mesh_type: str ="hexagonal", sensitivity: float =1, 
+                    metrics_storage_location: str =None, diagrams_storage_location: str =None, log_storage_location: str =None, 
+                    notes: str =None, return_metrics: bool =True, return_diagrams: bool =False):
     
-    """ Takes in expression and co-ordinate data for a set of wells from a single sample and computes a CoSS score for each gene. 
-        Optionally stores metrics (norms, ratios, ranks, and SVG calls) and diagrams in user-specified locations.
-        
-        - data [pandas.DataFrame]: pandas DataFrame of the form
-                                       x , y , gene1 , gene2, ... , geneN
-                                       .   .     .       .            .    
-                                       .   .     .       .            .    
-                                   where (x, y) are the co-ordinates of each well, and genei is the expression of gene i in each well
-                                      
-        - p [float in [1, inf)]: Specifies which norm to compute from the 0D persistence diagram
-        - m [float in (0,1]]: Specifies the threshold to use in distance to measure computation
-        - mesh_type [str from ['hexagonal', 'square']]: Type of mesh that the co-ordinates lie on.
-        - sensitivity [positive float]: Informs the CoSS cutoff for declaring a gene as spatially variable.
-        - metrics_storage_location [str]: Location to store metrics csv file.
-        - diagrams_storage_location [str]: Location to store dictionary of persistence diagrams. Stored as a pickle file.
-        - log_storage_location [str]: Where to record details of persistence computation. Stored as a text file. 
-        - notes [str]: Extra text to be appended on to the log. 
-        - return_metrics, return_diagrams [bool]: Specify what objects to return. If both are True, objects are returned in the order (metrics, diagrams). 
+    """ Computes spatial structure scores for all variables in a spatial 'omics dataset.
+    
+        Takes in expression and co-ordinate data for a set of wells from a single tissue sample and computes the Coefficient
+        of spatial structure (CoSS) for each gene. Optionally stores spatial metrics (norms, ratios, ranks, and SVG calls) and 
+        persistence diagrams in user-specified locations.
+
+        Parameters
+        ----------        
+        data : pd.DataFrame
+            pandas DataFrame of the form
+                   x , y , gene1 , gene2, ... , geneN
+                   .   .     .       .            .    
+                   .   .     .       .            .    
+            where (x, y) are the co-ordinates of each well, and genei is the expression of gene i in each well.                           
+        p : float, default=2 
+            Specifies which norm of the 0D persistence diagram to use as the CoSS. Should lie in [0,infinity).
+        m : float, default=0.1
+            Specifies the probability mass threshold to use in distance to measure computation. Should lie in (0,1).
+        mesh_type : str, default='hexagonal' 
+            Type of mesh that the well co-ordinates lie on. Allowed values are "hexagonal" or "square".
+        sensitivity : float, default=1 
+            Controls the behaviour of the automatic CoSS threshold selection for declaring a gene as spatially variable.
+        metrics_storage_location : str, default=None 
+            Filepath specifiying where to store metrics csv file.
+        diagrams_storage_location : str, default=None
+            Filepath specifiying where to store the dictionary of persistence diagrams for each gene. Stored as a pickle file.
+        log_storage_location : str, default=None
+            Filepath specifying where to record details of persistence computation. Stored as a text file. 
+        notes : str, default=None
+            Extra text to be appended on to the log. 
+        return_metrics : bool, default=True
+            Whether to return the metrics data frame. If return_metrics=True and return_diagrams=True, both objects will be reutrned in the order (metrics, diagrams). 
+        return_diagrams : bool, default=True 
+            Whether to return persistence diagrams what objects to return. If return_metrics=True and return_diagrams=True, both objects will be reutrned in the order (metrics, diagrams).
+
+        Returns
+        ----------
+        pd.DataFrame
+            Data frame contaning CoSS and other metrics for each gene.
+        List[d.Diagram]
+            Lost of persistence diagrams for each gene, indexed by gene name (taken from the column names of the input data frame).       
         
         """
     

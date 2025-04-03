@@ -2,13 +2,26 @@
 
 import numpy as np
 
-def get_distances(num_wells, well_seperation, mesh_type):
-    """ Computes an ordered list of the squared distances from the central vertex to the nearest other vertices in a radial 
-        hexagonal or square grid with a specified distance between adjacent vertices. 
-        
-        - num_wells [int]: Number of vertices to compute distances to.
-        - well_seperation [float]: Distance between adjacent vertices
-        - mesh_type [str in ['hexagonal', 'square']]: What type of mesh the vertices lie on. """
+def get_distances(num_wells: int, well_seperation: float, mesh_type: str) -> np.ndarray:
+    """ Computes an ordered list of the squared distances from the central vertex to the nearest other vertices, in a radial 
+        hexagonal or square grid, with a specified distance between adjacent vertices. To be called upon by
+        compute_persistence.run_persistence()
+
+        Parameters 
+        ----------
+        num_wells : int
+            Number of vertices to compute distances to.
+        well_separation : float
+             Distance between adjacent vertices
+        mesh_type : str
+            Should be 'hexagonal' or 'square'.
+
+        Returns
+        ----------
+        np.ndarray
+            An ordered list of distances.
+            
+    """
     
     # compute how many "rings" needed to acheive the number of vertices
     R_max = 0
