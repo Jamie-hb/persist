@@ -10,4 +10,4 @@ PersiST can be installed using pip:
 
 # Tutorial
 
-For a tutorial showing how to use PersiST, please see the package [https://github.com/Jamie-hb/persist](github page).
+For a tutorial showing how to use PersiST, please see the package github page at https://github.com/Jamie-hb/persist.

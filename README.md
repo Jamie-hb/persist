@@ -10,7 +10,13 @@ PersiST can be installed using pip:
 
 ```python3 -m pip install persist_spatial``` 
 
-# Spatially Variable Gene Identification
+# Documentation 
+
+PersiST's documentation can be found [https://persist-spatial.readthedocs.io/en/latest/](here).
+
+# Tutorial
+
+## Spatially Variable Gene Identification
 
 For this tutorial, we shall be looking at a Visium type spatial transcriptomics data on a sample from the Kidney Precision Medicine Project[1]. 
 
@@ -344,7 +350,7 @@ plot_many_genes(df, ['PODXL', 'PTGDS', 'IGFBP5', 'TGFBR2', 'IFI27', 'HTRA1'], nu
 
 ![png](README_images/podxl_svgs.png)
 
-# Differential Spatial Expression Testing
+## Differential Spatial Expression Testing
 
 If you are working with multiple spatial transcriptomics samples, and there are defined subgroups present within these samples, the CoSS scores can be used to look for genes that display difference in their spatial pattern of expression between the subgroups.
 
@@ -356,7 +362,7 @@ In the AKI samples, UMOD displays well-defined regions of higher expression, whe
 
 UMOD is a marker gene for tubles, a key structural component of the kidney. It is plausible that this difference in expression between the AKI and CKD samples reflects the structural breakdown that is chracteristic of progressed kidney disease. Using PersiST, we are able to automatically detect and quantify this structural breakdown.
 
-# References
+## References
 
 [1] Blue B Lake et al. “An atlas of healthy and injured cell states and niches in the human kidney”. In: Nature
 619.7970 (2023), pp. 585–594.
