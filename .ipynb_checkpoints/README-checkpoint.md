@@ -2,17 +2,11 @@
 
 # PersiST
 
-PersiST is an exploratory method for analysing spatial transcriptomics (and other spatial 'omics) datsets. Given a spatial transcriptomics data set containing expression data on multiple genes, resolved to a shared set of co-ordinates (for example, Visium type spatial transcriptomics data), PersiST computes a single score for each gene that measures the amount of spatial structure that gene shows in it's expression pattern, called the *Coefficient of Spatial Structure* (CoSS). This score can be used for multiple analytical tasks, as we show below.
-
-# Installation
-
-PersiST can be installed using pip:
-
-```python3 -m pip install persist-spatial``` 
+PersiST is an exploratory method for analysing spatial transcriptomics (and other 'omics) datsets. Given a spatial transcriptomics data set containing expression data on multiple genes resolved to a shared set of co-orindates, PerisST computes a single score for each gene that measures the amount of spatial structure that gene shows in it's expression pattern, called the *Coefficient of Spatial Structure* (CoSS). This score can be used for multiple analytical tasks, as we show below.
 
 # Spatially Variable Gene Identification
 
-For this tutorial, we shall be looking at a Visium type spatial transcriptomics data on a sample from the Kidney Precision Medicine Project[1]. 
+For this tutorial, we shall be looking at spatial transcriptomics data on a sample from the Kidney Precision Medicine Project[1]. 
 
 
 ```python
@@ -25,6 +19,19 @@ df.head()
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -180,13 +187,13 @@ df.head()
 
 
 
-This is a pandas DataFrame where the first two columns correspond to the well co-ordinates, and the remaining columns contain the expression of each gene in each well (in this case measured in counts per million). This is the format PersiST expects spatial transcriptomics data to come in.
+This is a pandas DataFrame where the first two columns correspond to the well co-ordinates, and the remaining columns contain the expression of each gene. This is the format PersiST expects spatial transcriptomics data to come in.
 
-We can compute CoSS values for all the genes in this sample using the function `run_persistence()`, which takes as input a data frame like the above. This should take about 10 - 20 minutes, depending on the system you are running this on.
+Let's compute CoSS scores for all the genes in this sample (this will take about 10 - 20 minutes).
 
 
 ```python
-from persist.compute_persistence import run_persistence
+from compute_persistence import run_persistence
 metrics = run_persistence(df)
 ```
 
@@ -202,6 +209,19 @@ metrics.iloc[:10,:]
 
 
 <div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
 <table border="1" class="dataframe">
   <thead>
     <tr style="text-align: right;">
@@ -319,42 +339,42 @@ PersiST outputs a number of quantities for each gene:
 - **possible_artefact**: Based on the ratio, PersiST automatically flags genes as possible artefacts [2]. We emphasise that this is only a suggestion, manual inspection should be performed before dismissing any genes.
 - **svg**: Based on the CoSS scores, PersiST automatically calls genes as spatially variable or not [2].
 
-We can plot the expression of those genes for which the CoSS is highest using the function `plot_many_genes()`, to which we need to provide a dataframe containing spatial expression data, and a list of genes to plot. 
+Let's plot the expression of those genes for which the CoSS is highest (here expression is measured in counts per million).
 
 
 ```python
-from persist.plotting_utils import plot_many_genes
+from plotting_utils import plot_many_genes
 plot_many_genes(df, list(metrics.gene)[:20])
 ```
 
-![png](README_images/kpmp_svgs.png)
+![png](README_files/kpmp_svgs.png)
 
 We can see that PersiST effectively surfaces those genes with notable spatial structure.
 
-From the CoSS scores PersiST automatically calles genes as spatially variable or not (this is the 'svg' column in the results). This provides a triaged list of genes that can be selected for further analysis. 
+From the CoSS scores PersiST automatically calles genes as spatially variable or not (this is the 'svg' column in the results). This provides a triaged list of genes that can be subjected to further analysis. 
 
-For example, one can search for genes with spatially similar expression patterns. Reduction to the comparatively small number of genes PersiST typically calls as SV makes this task much easier; in our experience simple clustering methods, such as hierarchical clustering, were effective to pick out groups of SVGs with co-localised expression.
+For example, one can search for genes with spatially similar expression patterns. Reducing to the comparatively small number of genes PersiST typically calls as SV makes this task much easier, in our experience simple clustering methods, such as hierarchical clustering, were effective to pick out groups of co-expressed SVGs.
 
-For example, we plot group of genes all expressed in the glomeruli of this particular sample [2]. This group was obtained by running simple hierarchichal clustering on the list of SVGs identified by PersiST and manually inspecting the results.
+For example, here is group of genes all expressed in the glomeruli of this particular sample [2]. This group was obtained by running simple hierarchichal clustering on the list of SVGs identified by PersiST and manually inspecting the results.
 
 
 ```python
 plot_many_genes(df, ['PODXL', 'PTGDS', 'IGFBP5', 'TGFBR2', 'IFI27', 'HTRA1'], numcols=3)
 ```
 
-![png](README_images/podxl_svgs.png)
+![png](README_files/podxl_svgs.png)
 
 # Differential Spatial Expression Testing
 
-If you are working with multiple spatial transcriptomics samples, and there are defined subgroups present within these samples, the CoSS scores can be used to look for genes that display difference in their spatial pattern of expression between the subgroups.
+If you are working with multiple spatial transcriptomics samples, and there are defiend subgroups present within these samples, the CoSS scores allow for some rudimentary differential spatial expression testing.
 
-In the KPMP dataset, there are Acute Kidney Infection (AKI) and Chronic Kidney Disease (CKD) samples. For each gene, we computed the average CoSS score within the AKI and CKD samples. The gene with the highest different ebtween the two was UMOD. Below we plot the expression of UMOD in all the kpmp samples.
+In the KPMP dataset, there are Acute Kidney Infection (AKI) and Chronic Kidney Disease (CKD) samples. For each gene, we computed the average CoSS score within the AKI and CKD samples. The gene with the highest different ebtween the two was UMOD.
 
-![png](README_images/umod_comparison.png)
+![png](README_files/umod_comparison.png)
 
 In the AKI samples, UMOD displays well-defined regions of higher expression, whereas in the CKD samples the expression of UMOD is much more diffuse. 
 
-UMOD is a marker gene for tubles, a key structural component of the kidney. It is plausible that this difference in expression between the AKI and CKD samples reflects the structural breakdown that is chracteristic of progressed kidney disease. Using PersiST, we are able to automatically detect and quantify this structural breakdown.
+UMOD is a marker gene for tubles, a key structural component of the kidney. We hypothesis that this difference in expression between the AKI and CKD samples reflects the structural breakdown that is chracteristic of progressed kidney disease.
 
 # References
 

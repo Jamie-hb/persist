@@ -6,10 +6,10 @@ from scipy.sparse import csc_array
 from sklearn.preprocessing import normalize
 from typing import List
 
-from network_functions import get_distances
-from smoothed_expression import distance_to_measure_weighted
-from topology_utils import p_norm, diagram_to_array, function_filtration
-from post_ph_functions import find_knee
+from persist.network_functions import get_distances
+from persist.smoothed_expression import distance_to_measure_weighted
+from persist.topology_utils import p_norm, diagram_to_array, function_filtration
+from persist.post_ph_functions import find_knee
 
 def run_persistence(data: pd.DataFrame, p: int =2, m: float =0.1, mesh_type: str ="hexagonal", sensitivity: float =1, 
                     metrics_storage_location: str =None, diagrams_storage_location: str =None, log_storage_location: str =None, 

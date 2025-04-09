@@ -81,7 +81,7 @@ def p_norm(diagram: np.ndarray, p: int =2) -> float:
 
 # Construct the filtration for a specific set of vertices, edges, and values defined on vertices
 
-def function_filtration(values: np.ndarray, edges: np.ndarray) -> d.Simplex:
+def function_filtration(values: np.ndarray, edges: np.ndarray) -> d.Filtration:
     """ Computes the upper star filtration given am adjacency structure and values at each vertex.
         
         Takes in an adjacency structure (which vertices are adjacent to each other) a list of function values at a set of vertices, and
@@ -101,7 +101,7 @@ def function_filtration(values: np.ndarray, edges: np.ndarray) -> d.Simplex:
             
         Returns
         ----------
-        d.Simplex
+        d.Filtration
             Simplex representing the function filtration.
         
     """
