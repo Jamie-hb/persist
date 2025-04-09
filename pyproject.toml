@@ -3,7 +3,7 @@ requires = ['hatchling >= 1.26']
 build-backend = 'hatchling.build'
 
 [project]
-name = 'persist'
+name = 'persist_spatial'
 version = '0.1.0'
 authors = [
 	{name = 'James Boyle', email='james.boyle@maths.ox.ac.uk'},
@@ -25,5 +25,5 @@ classifiers = [
 	'Programming Language :: Python :: 3',
 	'Operating System :: OS Independent',
 ]
-license = 'Apache 2.0'
+license = 'Apache-2.0'
 license-files = ['LICEN[CS]E*']

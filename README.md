@@ -8,7 +8,7 @@ PersiST is an exploratory method for analysing spatial transcriptomics (and othe
 
 PersiST can be installed using pip:
 
-```python3 -m pip install persist-spatial``` 
+```python3 -m pip install persist_spatial``` 
 
 # Spatially Variable Gene Identification
 
@@ -186,7 +186,7 @@ We can compute CoSS values for all the genes in this sample using the function `
 
 
 ```python
-from persist.compute_persistence import run_persistence
+from persist_spatial.compute_persistence import run_persistence
 metrics = run_persistence(df)
 ```
 
@@ -323,7 +323,7 @@ We can plot the expression of those genes for which the CoSS is highest using th
 
 
 ```python
-from persist.plotting_utils import plot_many_genes
+from persist_spatial.plotting_utils import plot_many_genes
 plot_many_genes(df, list(metrics.gene)[:20])
 ```
 
