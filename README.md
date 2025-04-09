@@ -1,4 +1,4 @@
-<img src='README_images/PersiST_Logo.png' width='300' > 
+<img src='https://github.com/Jamie-hb/persist/blob/main/README_images/PersiST_Logo.png' width='300' > 
 
 # PersiST
 
