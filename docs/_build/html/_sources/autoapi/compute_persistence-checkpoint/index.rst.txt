@@ -1,0 +1,57 @@
+compute_persistence-checkpoint
+==============================
+
+.. py:module:: compute_persistence-checkpoint
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   compute_persistence-checkpoint.run_persistence
+
+
+Module Contents
+---------------
+
+.. py:function:: run_persistence(data: pandas.DataFrame, p: int = 2, m: float = 0.1, mesh_type: str = 'hexagonal', sensitivity: float = 1, metrics_storage_location: str = None, diagrams_storage_location: str = None, log_storage_location: str = None, notes: str = None, return_metrics: bool = True, return_diagrams: bool = False)
+
+   Computes spatial structure scores for all variables in a spatial 'omics dataset.
+
+   Takes in expression and co-ordinate data for a set of wells from a single tissue sample and computes the Coefficient
+   of spatial structure (CoSS) for each gene. Optionally stores spatial metrics (norms, ratios, ranks, and SVG calls) and
+   persistence diagrams in user-specified locations.
+
+   :param data:
+                pandas DataFrame of the form
+                       x , y , gene1 , gene2, ... , geneN
+                       .   .     .       .            .
+                       .   .     .       .            .
+                where (x, y) are the co-ordinates of each well, and genei is the expression of gene i in each well.
+   :type data: pd.DataFrame
+   :param p: Specifies which norm of the 0D persistence diagram to use as the CoSS. Should lie in [0,infinity).
+   :type p: float, default=2
+   :param m: Specifies the probability mass threshold to use in distance to measure computation. Should lie in (0,1).
+   :type m: float, default=0.1
+   :param mesh_type: Type of mesh that the well co-ordinates lie on. Allowed values are "hexagonal" or "square".
+   :type mesh_type: str, default='hexagonal'
+   :param sensitivity: Controls the behaviour of the automatic CoSS threshold selection for declaring a gene as spatially variable.
+   :type sensitivity: float, default=1
+   :param metrics_storage_location: Filepath specifiying where to store metrics csv file.
+   :type metrics_storage_location: str, default=None
+   :param diagrams_storage_location: Filepath specifiying where to store the dictionary of persistence diagrams for each gene. Stored as a pickle file.
+   :type diagrams_storage_location: str, default=None
+   :param log_storage_location: Filepath specifying where to record details of persistence computation. Stored as a text file.
+   :type log_storage_location: str, default=None
+   :param notes: Extra text to be appended on to the log.
+   :type notes: str, default=None
+   :param return_metrics: Whether to return the metrics data frame. If return_metrics=True and return_diagrams=True, both objects will be reutrned in the order (metrics, diagrams).
+   :type return_metrics: bool, default=True
+   :param return_diagrams: Whether to return persistence diagrams what objects to return. If return_metrics=True and return_diagrams=True, both objects will be reutrned in the order (metrics, diagrams).
+   :type return_diagrams: bool, default=True
+
+   :returns: * *pd.DataFrame* -- Data frame contaning CoSS and other metrics for each gene.
+             * *List[d.Diagram]* -- Lost of persistence diagrams for each gene, indexed by gene name (taken from the column names of the input data frame).
+
+

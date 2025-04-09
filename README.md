@@ -348,7 +348,7 @@ plot_many_genes(df, ['PODXL', 'PTGDS', 'IGFBP5', 'TGFBR2', 'IFI27', 'HTRA1'], nu
 
 If you are working with multiple spatial transcriptomics samples, and there are defined subgroups present within these samples, the CoSS scores can be used to look for genes that display difference in their spatial pattern of expression between the subgroups.
 
-In the KPMP dataset, there are Acute Kidney Infection (AKI) and Chronic Kidney Disease (CKD) samples. For each gene, we computed the average CoSS score within the AKI and CKD samples. The gene with the highest different ebtween the two was UMOD. Below we plot the expression of UMOD in all the kpmp samples.
+In the KPMP dataset, there are Acute Kidney Infection (AKI) and Chronic Kidney Disease (CKD) samples. For each gene, we computed the average CoSS score within the AKI and CKD samples. The gene with the highest different between the two was UMOD. Below we plot the expression of UMOD in all the kpmp samples.
 
 ![png](README_images/umod_comparison.png)
 

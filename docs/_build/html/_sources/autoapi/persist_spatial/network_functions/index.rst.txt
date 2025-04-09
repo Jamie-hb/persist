@@ -1,0 +1,39 @@
+persist_spatial.network_functions
+=================================
+
+.. py:module:: persist_spatial.network_functions
+
+.. autoapi-nested-parse::
+
+   Functions related to the network structure of the co-ordinates in the input data.
+
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   persist_spatial.network_functions.get_distances
+
+
+Module Contents
+---------------
+
+.. py:function:: get_distances(num_wells: int, well_seperation: float, mesh_type: str) -> numpy.ndarray
+
+   Computes an ordered list of the squared distances from the central vertex to the nearest other vertices, in a radial
+   hexagonal or square grid, with a specified distance between adjacent vertices. To be called upon by
+   compute_persistence.run_persistence()
+
+   :param num_wells: Number of vertices to compute distances to.
+   :type num_wells: int
+   :param well_separation: Distance between adjacent vertices
+   :type well_separation: float
+   :param mesh_type: Should be 'hexagonal' or 'square'.
+   :type mesh_type: str
+
+   :returns: An ordered list of distances.
+   :rtype: np.ndarray
+
+

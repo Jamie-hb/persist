@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="./">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PersiST &mdash; PersiST Apr 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="_static/jquery.js?v=5d32c60e"></script>
+        <script src="_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="_static/documentation_options.js?v=61304451"></script>
+        <script src="_static/doctools.js?v=9a2dae69"></script>
+        <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Changelog" href="changelog.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="#" class="icon icon-home">
+            PersiST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+<li class="toctree-l1"><a class="reference internal" href="autoapi/index.html">API Reference</a></li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="#">PersiST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="#" class="icon icon-home" aria-label="Home"></a></li>
+      <li class="breadcrumb-item active">PersiST</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="_sources/index.md.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <img src='README_images/PersiST_Logo.png' width='300' > 
+<section id="persist">
+<h1>PersiST<a class="headerlink" href="#persist" title="Link to this heading"></a></h1>
+<p>PersiST is an exploratory method for analysing spatial transcriptomics (and other spatial ‘omics) datsets. Given a spatial transcriptomics data set containing expression data on multiple genes, resolved to a shared set of co-ordinates (for example, Visium type spatial transcriptomics data), PersiST computes a single score for each gene that measures the amount of spatial structure that gene shows in it’s expression pattern, called the <em>Coefficient of Spatial Structure</em> (CoSS). This score can be used for multiple analytical tasks, as we show below.</p>
+</section>
+<section id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Link to this heading"></a></h1>
+<p>PersiST can be installed using pip:</p>
+<p><code class="docutils literal notranslate"><span class="pre">python3</span> <span class="pre">-m</span> <span class="pre">pip</span> <span class="pre">install</span> <span class="pre">persist_spatial</span></code></p>
+</section>
+<section id="spatially-variable-gene-identification">
+<h1>Spatially Variable Gene Identification<a class="headerlink" href="#spatially-variable-gene-identification" title="Link to this heading"></a></h1>
+<p>For this tutorial, we shall be looking at a Visium type spatial transcriptomics data on a sample from the Kidney Precision Medicine Project[1].</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="s1">&#39;data/kpmp_30-10125_spatial_expression.csv&#39;</span><span class="p">)</span>
+<span class="n">df</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>x_position</th>
+      <th>y_position</th>
+      <th>TSPAN6</th>
+      <th>TNMD</th>
+      <th>DPM1</th>
+      <th>SCYL3</th>
+      <th>C1orf112</th>
+      <th>FGR</th>
+      <th>CFH</th>
+      <th>FUCA2</th>
+      <th>...</th>
+      <th>ENSG00000288156</th>
+      <th>ENSG00000288162</th>
+      <th>ENSG00000288172</th>
+      <th>ENSG00000288187</th>
+      <th>ENSG00000288234</th>
+      <th>ENSG00000288253</th>
+      <th>ENSG00000288302</th>
+      <th>ENSG00000288380</th>
+      <th>ENSG00000288398</th>
+      <th>SOD2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0.548810</td>
+      <td>0.834208</td>
+      <td>0.00000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>117.633220</td>
+      <td>0.00000</td>
+      <td>0.00000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1058.6990</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>0.589610</td>
+      <td>0.809106</td>
+      <td>0.00000</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>86.865880</td>
+      <td>173.73177</td>
+      <td>86.86588</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1737.3176</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>0.571644</td>
+      <td>0.166174</td>
+      <td>75.90709</td>
+      <td>0.0</td>
+      <td>75.907090</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>0.000000</td>
+      <td>151.81418</td>
+      <td>0.00000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>2201.3057</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.539074</td>
+      <td>0.714422</td>
+      <td>382.89725</td>
+      <td>0.0</td>
+      <td>127.632416</td>
+      <td>0.0</td>
+      <td>0.00000</td>
+      <td>127.632416</td>
+      <td>0.00000</td>
+      <td>0.00000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1148.6918</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>0.570493</td>
+      <td>0.468741</td>
+      <td>82.88438</td>
+      <td>0.0</td>
+      <td>0.000000</td>
+      <td>0.0</td>
+      <td>82.88438</td>
+      <td>0.000000</td>
+      <td>82.88438</td>
+      <td>0.00000</td>
+      <td>...</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>0.0</td>
+      <td>1989.2250</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 26026 columns</p>
+</div>
+<p>This is a pandas DataFrame where the first two columns correspond to the well co-ordinates, and the remaining columns contain the expression of each gene in each well (in this case measured in counts per million). This is the format PersiST expects spatial transcriptomics data to come in.</p>
+<p>We can compute CoSS values for all the genes in this sample using the function <code class="docutils literal notranslate"><span class="pre">run_persistence()</span></code>, which takes as input a data frame like the above. This should take about 10 - 20 minutes, depending on the system you are running this on.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">persist_spatial.compute_persistence</span> <span class="kn">import</span> <span class="n">run_persistence</span>
+<span class="n">metrics</span> <span class="o">=</span> <span class="n">run_persistence</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>The CoSS is a measure of the amount of spatial structure in a gene’s expression pattern. Let’s take a look at those genes with the highest CoSS scores:</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">metrics</span> <span class="o">=</span> <span class="n">metrics</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s1">&#39;CoSS&#39;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="n">metrics</span><span class="o">.</span><span class="n">iloc</span><span class="p">[:</span><span class="mi">10</span><span class="p">,:]</span>
+</pre></div>
+</div>
+<div>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>gene</th>
+      <th>CoSS</th>
+      <th>ratio</th>
+      <th>gene_rank</th>
+      <th>possible_artefact</th>
+      <th>svg</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>16443</th>
+      <td>IGLC1</td>
+      <td>0.141620</td>
+      <td>0.651803</td>
+      <td>1.0</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>16483</th>
+      <td>IGHG1</td>
+      <td>0.114255</td>
+      <td>0.467722</td>
+      <td>2.0</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>5372</th>
+      <td>MT1G</td>
+      <td>0.105850</td>
+      <td>0.335738</td>
+      <td>3.0</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>10798</th>
+      <td>DEFB1</td>
+      <td>0.103534</td>
+      <td>0.376595</td>
+      <td>4.0</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>12467</th>
+      <td>CCL19</td>
+      <td>0.101025</td>
+      <td>0.649770</td>
+      <td>5.0</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>22516</th>
+      <td>C17orf113</td>
+      <td>0.098336</td>
+      <td>0.574433</td>
+      <td>6.0</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>6980</th>
+      <td>ALDOB</td>
+      <td>0.096201</td>
+      <td>0.271491</td>
+      <td>7.0</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>5750</th>
+      <td>PODXL</td>
+      <td>0.095475</td>
+      <td>0.327815</td>
+      <td>8.0</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>1102</th>
+      <td>SLC12A3</td>
+      <td>0.095306</td>
+      <td>0.352575</td>
+      <td>9.0</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+    <tr>
+      <th>11812</th>
+      <td>UMOD</td>
+      <td>0.094709</td>
+      <td>0.401716</td>
+      <td>10.0</td>
+      <td>No</td>
+      <td>Yes</td>
+    </tr>
+  </tbody>
+</table>
+</div>
+<p>PersiST outputs a number of quantities for each gene:</p>
+<ul class="simple">
+<li><p><strong>CoSS</strong>: The Coefficient of Spatial Structure, a continuous quantity that can serve as a proxy for the amount of spatial structure in a gene’s expression.</p></li>
+<li><p><strong>Ratio</strong>: Roughly, this measures how much of a gene’s CoSS is down to a single spatial features. Genes with a high ratio may be techinical artefacts, see [2] for details.</p></li>
+<li><p><strong>gene_rank</strong>: The rank of each gene, where gene’s are ranked from highest to lowest CoSS (so a rank of 1 is give to the gene with the highest CoSS).</p></li>
+<li><p><strong>possible_artefact</strong>: Based on the ratio, PersiST automatically flags genes as possible artefacts [2]. We emphasise that this is only a suggestion, manual inspection should be performed before dismissing any genes.</p></li>
+<li><p><strong>svg</strong>: Based on the CoSS scores, PersiST automatically calls genes as spatially variable or not [2].</p></li>
+</ul>
+<p>We can plot the expression of those genes for which the CoSS is highest using the function <code class="docutils literal notranslate"><span class="pre">plot_many_genes()</span></code>, to which we need to provide a dataframe containing spatial expression data, and a list of genes to plot.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">persist_spatial.plotting_utils</span> <span class="kn">import</span> <span class="n">plot_many_genes</span>
+<span class="n">plot_many_genes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="nb">list</span><span class="p">(</span><span class="n">metrics</span><span class="o">.</span><span class="n">gene</span><span class="p">)[:</span><span class="mi">20</span><span class="p">])</span>
+</pre></div>
+</div>
+<p><img alt="png" src="https://github.com/Jamie-hb/persist/blob/main/README_images/kpmp_svgs.png" /></p>
+<p>We can see that PersiST effectively surfaces those genes with notable spatial structure.</p>
+<p>From the CoSS scores PersiST automatically calles genes as spatially variable or not (this is the ‘svg’ column in the results). This provides a triaged list of genes that can be selected for further analysis.</p>
+<p>For example, one can search for genes with spatially similar expression patterns. Reduction to the comparatively small number of genes PersiST typically calls as SV makes this task much easier; in our experience simple clustering methods, such as hierarchical clustering, were effective to pick out groups of SVGs with co-localised expression.</p>
+<p>For example, we plot group of genes all expressed in the glomeruli of this particular sample [2]. This group was obtained by running simple hierarchichal clustering on the list of SVGs identified by PersiST and manually inspecting the results.</p>
+<div class="highlight-python notranslate"><div class="highlight"><pre><span></span><span class="n">plot_many_genes</span><span class="p">(</span><span class="n">df</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;PODXL&#39;</span><span class="p">,</span> <span class="s1">&#39;PTGDS&#39;</span><span class="p">,</span> <span class="s1">&#39;IGFBP5&#39;</span><span class="p">,</span> <span class="s1">&#39;TGFBR2&#39;</span><span class="p">,</span> <span class="s1">&#39;IFI27&#39;</span><span class="p">,</span> <span class="s1">&#39;HTRA1&#39;</span><span class="p">],</span> <span class="n">numcols</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><img alt="png" src="README_images/podxl_svgs.png" /></p>
+</section>
+<section id="differential-spatial-expression-testing">
+<h1>Differential Spatial Expression Testing<a class="headerlink" href="#differential-spatial-expression-testing" title="Link to this heading"></a></h1>
+<p>If you are working with multiple spatial transcriptomics samples, and there are defined subgroups present within these samples, the CoSS scores can be used to look for genes that display difference in their spatial pattern of expression between the subgroups.</p>
+<p>In the KPMP dataset, there are Acute Kidney Infection (AKI) and Chronic Kidney Disease (CKD) samples. For each gene, we computed the average CoSS score within the AKI and CKD samples. The gene with the highest different between the two was UMOD. Below we plot the expression of UMOD in all the kpmp samples.</p>
+<p><img alt="png" src="README_images/umod_comparison.png" /></p>
+<p>In the AKI samples, UMOD displays well-defined regions of higher expression, whereas in the CKD samples the expression of UMOD is much more diffuse.</p>
+<p>UMOD is a marker gene for tubles, a key structural component of the kidney. It is plausible that this difference in expression between the AKI and CKD samples reflects the structural breakdown that is chracteristic of progressed kidney disease. Using PersiST, we are able to automatically detect and quantify this structural breakdown.</p>
+</section>
+<section id="references">
+<h1>References<a class="headerlink" href="#references" title="Link to this heading"></a></h1>
+<p>[1] Blue B Lake et al. “An atlas of healthy and injured cell states and niches in the human kidney”. In: Nature
+619.7970 (2023), pp. 585–594.</p>
+<p>[2] PersiST paper (not yet published)</p>
+<div class="toctree-wrapper compound">
+</div>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="changelog.html" class="btn btn-neutral float-right" title="Changelog" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, James Boyle.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

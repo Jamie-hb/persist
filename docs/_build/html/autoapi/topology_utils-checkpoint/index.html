@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>topology_utils-checkpoint &mdash; PersiST Apr 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../_static/documentation_options.js?v=61304451"></script>
+        <script src="../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="network_functions-checkpoint" href="../network_functions-checkpoint/index.html" />
+    <link rel="prev" title="plotting_utils-checkpoint" href="../plotting_utils-checkpoint/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../index.html" class="icon icon-home">
+            PersiST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="../persist_spatial/index.html">persist_spatial</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../plotting_utils-checkpoint/index.html">plotting_utils-checkpoint</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">topology_utils-checkpoint</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#functions">Functions</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#module-contents">Module Contents</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#topology_utils-checkpoint.diagram_to_array"><code class="docutils literal notranslate"><span class="pre">diagram_to_array()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#topology_utils-checkpoint.p_norm"><code class="docutils literal notranslate"><span class="pre">p_norm()</span></code></a></li>
+<li class="toctree-l4"><a class="reference internal" href="#topology_utils-checkpoint.function_filtration"><code class="docutils literal notranslate"><span class="pre">function_filtration()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="../network_functions-checkpoint/index.html">network_functions-checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../post_ph_functions-checkpoint/index.html">post_ph_functions-checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../compute_persistence-checkpoint/index.html">compute_persistence-checkpoint</a></li>
+<li class="toctree-l2"><a class="reference internal" href="../smoothed_expression-checkpoint/index.html">smoothed_expression-checkpoint</a></li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../index.html">PersiST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../index.html">API Reference</a></li>
+      <li class="breadcrumb-item active">topology_utils-checkpoint</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../_sources/autoapi/topology_utils-checkpoint/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-topology_utils-checkpoint">
+<span id="topology-utils-checkpoint"></span><h1>topology_utils-checkpoint<a class="headerlink" href="#module-topology_utils-checkpoint" title="Link to this heading"></a></h1>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#topology_utils-checkpoint.diagram_to_array" title="topology_utils-checkpoint.diagram_to_array"><code class="xref py py-obj docutils literal notranslate"><span class="pre">diagram_to_array</span></code></a>(→ numpy.ndarray)</p></td>
+<td><p>Converts a persistence diagram to a numpy array.</p></td>
+</tr>
+<tr class="row-even"><td><p><a class="reference internal" href="#topology_utils-checkpoint.p_norm" title="topology_utils-checkpoint.p_norm"><code class="xref py py-obj docutils literal notranslate"><span class="pre">p_norm</span></code></a>(→ float)</p></td>
+<td><p>Computes the p-norm of a diagram given in array form. To be called upon by compute_persistence.run_persistence().</p></td>
+</tr>
+<tr class="row-odd"><td><p><a class="reference internal" href="#topology_utils-checkpoint.function_filtration" title="topology_utils-checkpoint.function_filtration"><code class="xref py py-obj docutils literal notranslate"><span class="pre">function_filtration</span></code></a>(→ dionysus.Filtration)</p></td>
+<td><p>Computes the upper star filtration given am adjacency structure and values at each vertex.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="topology_utils-checkpoint.diagram_to_array">
+<span class="sig-prename descclassname"><span class="pre">topology_utils-checkpoint.</span></span><span class="sig-name descname"><span class="pre">diagram_to_array</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diagram</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dimension</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">numpy.ndarray</span></span></span><a class="headerlink" href="#topology_utils-checkpoint.diagram_to_array" title="Link to this definition"></a></dt>
+<dd><p>Converts a persistence diagram to a numpy array.</p>
+<p>Takes in a dionysus diagram object and returns a m x 2 numpy array with the birth and death times
+of each persistence feature of a given dimension in the diagram. Of the form</p>
+<blockquote>
+<div><p>feature_1 feature_2 … feature_n</p>
+</div></blockquote>
+<p>birth time     .         .     …     .
+death time     .         .     …     .
+To be called upon by compute_persistence.run_persistence().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>diagram</strong> (<em>List</em><em>[</em><em>d.Diagram</em><em>]</em>) – List of dionysus diagrams, one for each dimension.</p></li>
+<li><p><strong>dimension</strong> (<em>int</em><em>, </em><em>default=0</em>) – Which homology dimension to take the persistent features from.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Array containing birth and death features for each feature in the specified dimension of the diagram.
+Dimensions 2 x n_features.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>np.ndarray</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topology_utils-checkpoint.p_norm">
+<span class="sig-prename descclassname"><span class="pre">topology_utils-checkpoint.</span></span><span class="sig-name descname"><span class="pre">p_norm</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">diagram</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">float</span></span></span><a class="headerlink" href="#topology_utils-checkpoint.p_norm" title="Link to this definition"></a></dt>
+<dd><p>Computes the p-norm of a diagram given in array form. To be called upon by compute_persistence.run_persistence().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>diagram</strong> (<em>np.ndarray</em>) – <dl class="simple">
+<dt>Array containing birth and death times of features from a persistence diagram. Of the form</dt><dd><p>feature_1 feature_2 … feature_n</p>
+</dd>
+</dl>
+<p>birth time     .         .     …     .
+death time     .         .     …     .</p>
+</p></li>
+<li><p><strong>p</strong> (<em>int</em><em>, </em><em>default=2:</em>) – Which norm to compute.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>p-norm of the given diagram.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py function">
+<dt class="sig sig-object py" id="topology_utils-checkpoint.function_filtration">
+<span class="sig-prename descclassname"><span class="pre">topology_utils-checkpoint.</span></span><span class="sig-name descname"><span class="pre">function_filtration</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">values</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">edges</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">numpy.ndarray</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">dionysus.Filtration</span></span></span><a class="headerlink" href="#topology_utils-checkpoint.function_filtration" title="Link to this definition"></a></dt>
+<dd><p>Computes the upper star filtration given am adjacency structure and values at each vertex.</p>
+<p>Takes in an adjacency structure (which vertices are adjacent to each other) a list of function values at a set of vertices, and
+computes the upper star filtration for this function on the given network structure. In the resulting filtration,</p>
+<blockquote>
+<div><ul class="simple">
+<li><p>index of each vertex = value of the function at that vertex</p></li>
+<li><p>index of an edge = value of the function on the lowest vertex of the edge</p></li>
+</ul>
+</div></blockquote>
+<p>Higher dimensional faces not included as they do not affect the 0D PH.
+To be called upon by compute_persistence.run_persistence().</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>values</strong> (<em>np.ndarray</em>) – Values of the function at each vertex. Dimensions n_vertices x 1</p></li>
+<li><p><strong>edges</strong> (<em>np.ndarray</em>) – A 2d matrix specfying which vertices are adjacent. Each row [a,b]  specfies that a and b are adjacent,
+and adds the edge [a,b] to the simplex. Dimensions n_edges x 2.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p>Simplex representing the function filtration.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>d.Filtration</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../plotting_utils-checkpoint/index.html" class="btn btn-neutral float-left" title="plotting_utils-checkpoint" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../network_functions-checkpoint/index.html" class="btn btn-neutral float-right" title="network_functions-checkpoint" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, James Boyle.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>persist_spatial.plotting_utils &mdash; PersiST Apr 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=61304451"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="persist_spatial.post_ph_functions" href="../post_ph_functions/index.html" />
+    <link rel="prev" title="persist_spatial.network_functions" href="../network_functions/index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PersiST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">persist_spatial</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4"><a class="reference internal" href="../compute_persistence/index.html">persist_spatial.compute_persistence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../network_functions/index.html">persist_spatial.network_functions</a></li>
+<li class="toctree-l4 current"><a class="current reference internal" href="#">persist_spatial.plotting_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../post_ph_functions/index.html">persist_spatial.post_ph_functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../smoothed_expression/index.html">persist_spatial.smoothed_expression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../topology_utils/index.html">persist_spatial.topology_utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PersiST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">persist_spatial</a></li>
+      <li class="breadcrumb-item active">persist_spatial.plotting_utils</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/persist_spatial/plotting_utils/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-persist_spatial.plotting_utils">
+<span id="persist-spatial-plotting-utils"></span><h1>persist_spatial.plotting_utils<a class="headerlink" href="#module-persist_spatial.plotting_utils" title="Link to this heading"></a></h1>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#persist_spatial.plotting_utils.plot_many_genes" title="persist_spatial.plotting_utils.plot_many_genes"><code class="xref py py-obj docutils literal notranslate"><span class="pre">plot_many_genes</span></code></a>(→ None)</p></td>
+<td><p>Produces a figure with subplots showing the spatial expression of genes from the same tissue sample.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="persist_spatial.plotting_utils.plot_many_genes">
+<span class="sig-prename descclassname"><span class="pre">persist_spatial.plotting_utils.</span></span><span class="sig-name descname"><span class="pre">plot_many_genes</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">genes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">List</span><span class="p"><span class="pre">[</span></span><span class="pre">str</span><span class="p"><span class="pre">]</span></span></span></em>, <em class="sig-param"><span class="n"><span class="pre">s</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">25</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figwidth</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">4</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">figheight</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">8</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">numcols</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">title_fontsize</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">20</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">dpi</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_zero_wells</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span> <span class="sig-return"><span class="sig-return-icon">&#x2192;</span> <span class="sig-return-typehint"><span class="pre">None</span></span></span><a class="headerlink" href="#persist_spatial.plotting_utils.plot_many_genes" title="Link to this definition"></a></dt>
+<dd><p>Produces a figure with subplots showing the spatial expression of genes from the same tissue sample.</p>
+<p>Produces a suplot for the expression of a specified list of genes, whose expression is contained in
+the columns of the given data frame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>pd.DataFrame</em>) – <dl class="simple">
+<dt>pandas DataFrame of the form</dt><dd><p>x , y , gene1 , gene2, … , geneN
+.   .     .       .            .
+.   .     .       .            .</p>
+</dd>
+</dl>
+<p>where (x, y) are the co-ordinates of each well, and genei is the expression of gene i in each well.</p>
+</p></li>
+<li><p><strong>genes</strong> (<em>List</em><em>[</em><em>str</em><em>]</em>) – List of genes to make expression plots of. Each entry should be the name of a column in df.</p></li>
+<li><p><strong>s</strong> (<em>float</em><em>, </em><em>default=25</em>) – Size of spots at each well. ‘s’ parameter in sns.scatterplot().</p></li>
+<li><p><strong>figwidth</strong> (<em>float</em><em>, </em><em>default=4</em>) – Width of each subplot. The width of the overall figure will then be this multiplied by the number of columns, passed as the
+first element of the figsize argument in plt.subplots().</p></li>
+<li><p><strong>figheight</strong> (<em>float</em><em>, </em><em>default=8</em>) – Height of each subplot. The height of the overall figure will then be this multiplied by the number of rows, passed as the
+second element of the figsize argument in plt.subplots().</p></li>
+<li><p><strong>numcols</strong> (<em>int</em><em>, </em><em>default=5</em>) – The number of genes plotted in each row of the overal figure.</p></li>
+<li><p><strong>title</strong> (<em>float</em><em>, </em><em>default=None</em>) – Title for the overall figure. Passed to plt.suptitle().</p></li>
+<li><p><strong>title_fontsize</strong> (<em>float</em><em>, </em><em>default=20</em>) – Font size of figure title. Passed to the fontsize argument in plt.suptitle()</p></li>
+<li><p><strong>dpi</strong> (<em>float</em><em>, </em><em>default=None</em>) – Dots per inch of the overall figure, passed to the dpi parameter in plt.subplots().</p></li>
+<li><p><strong>show_zero_wells</strong> (<em>bool</em><em>, </em><em>default=False</em>) – Specify whether to plot wells with zero expression.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Return type<span class="colon">:</span></dt>
+<dd class="field-even"><p>None</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../network_functions/index.html" class="btn btn-neutral float-left" title="persist_spatial.network_functions" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../post_ph_functions/index.html" class="btn btn-neutral float-right" title="persist_spatial.post_ph_functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, James Boyle.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

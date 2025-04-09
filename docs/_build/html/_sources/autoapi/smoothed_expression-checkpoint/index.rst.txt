@@ -1,0 +1,58 @@
+smoothed_expression-checkpoint
+==============================
+
+.. py:module:: smoothed_expression-checkpoint
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   smoothed_expression-checkpoint.distance_to_measure_point
+   smoothed_expression-checkpoint.distance_to_measure_weighted
+
+
+Module Contents
+---------------
+
+.. py:function:: distance_to_measure_point(weights: numpy.ndarray, distances: numpy.ndarray, m: float) -> float
+
+   Computes the dtm at a single point.
+
+   Given a sorted vector of probability masses and squared distances to the neighbours of a single point,
+   computes the distance to measure at that point. To be called on by smoothed_expression.distance_to_measure_weighted().
+
+   :param weights: Probability masses at neighbour points, pre sorted by increasing distance from central vertex.
+   :type weights: np.ndarray
+   :param distances: Squared distances to neighbour vertices, in increasing order.
+   :type distances: np.ndarray
+   :param m: Threshold probability mass to compute distance to. Should lie in (0,1).
+   :type m: float
+
+   :returns: Distance to measure at input point.
+   :rtype: float
+
+
+.. py:function:: distance_to_measure_weighted(weights: numpy.ndarray, dmat: numpy.ndarray, m: float) -> numpy.ndarray
+
+   Computes the distance to measure at each point.
+
+   Given a vector of expression weights, a well-well distance matrix, and an ordered list of
+   distances from the central vertex in a radial network, computes the
+   distance to measure at each vertex. Designed to be called upon by compute_persistence.run_persistence()
+
+   :param weights: Expression in each well, should be normalised to sum to 1. Dimensions n_wells x 1
+   :type weights: np.ndarray
+   :param dmat: Well-well distance matrix where dmat[i,j] = d(well_i, well_j). Dimensions n_wells x n_wells
+   :type dmat: np.ndarray
+   :param network_distances: Sorted array of distances from a central well to its nearest neighbour wells,
+                             distances[i] = d(central vertex, ith nearest other vertex). Dimensions n_wells x 1.
+   :type network_distances: np.ndarray
+   :param m: Probability mass threshold to use in distance to measure calculations. Should lie in (0,1).
+   :type m: float
+
+   :returns: Distance to measure at each well. Dimensions n_wells x 1.
+   :rtype: np.ndarray
+
+

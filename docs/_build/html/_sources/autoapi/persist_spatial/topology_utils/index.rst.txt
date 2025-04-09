@@ -1,0 +1,78 @@
+persist_spatial.topology_utils
+==============================
+
+.. py:module:: persist_spatial.topology_utils
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   persist_spatial.topology_utils.diagram_to_array
+   persist_spatial.topology_utils.p_norm
+   persist_spatial.topology_utils.function_filtration
+
+
+Module Contents
+---------------
+
+.. py:function:: diagram_to_array(diagram, dimension=0) -> numpy.ndarray
+
+   Converts a persistence diagram to a numpy array.
+
+   Takes in a dionysus diagram object and returns a m x 2 numpy array with the birth and death times
+   of each persistence feature of a given dimension in the diagram. Of the form
+              feature_1 feature_2 ... feature_n
+   birth time     .         .     ...     .
+   death time     .         .     ...     .
+   To be called upon by compute_persistence.run_persistence().
+
+   :param diagram: List of dionysus diagrams, one for each dimension.
+   :type diagram: List[d.Diagram]
+   :param dimension: Which homology dimension to take the persistent features from.
+   :type dimension: int, default=0
+
+   :returns: Array containing birth and death features for each feature in the specified dimension of the diagram.
+             Dimensions 2 x n_features.
+   :rtype: np.ndarray
+
+
+.. py:function:: p_norm(diagram: numpy.ndarray, p: int = 2) -> float
+
+   Computes the p-norm of a diagram given in array form. To be called upon by compute_persistence.run_persistence().
+
+   :param diagram:
+                   Array containing birth and death times of features from a persistence diagram. Of the form
+                              feature_1 feature_2 ... feature_n
+                   birth time     .         .     ...     .
+                   death time     .         .     ...     .
+   :type diagram: np.ndarray
+   :param p: Which norm to compute.
+   :type p: int, default=2:
+
+   :returns: p-norm of the given diagram.
+   :rtype: float
+
+
+.. py:function:: function_filtration(values: numpy.ndarray, edges: numpy.ndarray) -> dionysus.Filtration
+
+   Computes the upper star filtration given am adjacency structure and values at each vertex.
+
+   Takes in an adjacency structure (which vertices are adjacent to each other) a list of function values at a set of vertices, and
+   computes the upper star filtration for this function on the given network structure. In the resulting filtration,
+       - index of each vertex = value of the function at that vertex
+       - index of an edge = value of the function on the lowest vertex of the edge
+   Higher dimensional faces not included as they do not affect the 0D PH.
+   To be called upon by compute_persistence.run_persistence().
+
+   :param values: Values of the function at each vertex. Dimensions n_vertices x 1
+   :type values: np.ndarray
+   :param edges: A 2d matrix specfying which vertices are adjacent. Each row [a,b]  specfies that a and b are adjacent,
+                 and adds the edge [a,b] to the simplex. Dimensions n_edges x 2.
+   :type edges: np.ndarray
+
+   :returns: Simplex representing the function filtration.
+   :rtype: d.Filtration
+
+

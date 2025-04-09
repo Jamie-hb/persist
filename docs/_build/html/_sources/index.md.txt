@@ -1,4 +1,4 @@
-```{include} rtd_README.md
+```{include} ../README.md
 ```
 
 ```{toctree}

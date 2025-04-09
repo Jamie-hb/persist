@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" data-content_root="../../../">
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.18.1: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>persist_spatial.compute_persistence &mdash; PersiST Apr 2025 documentation</title>
+      <link rel="stylesheet" type="text/css" href="../../../_static/pygments.css?v=92fd9be5" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/css/theme.css?v=19f00094" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/mystnb.4510f1fc1dee50b3e5859aac5469c37c29e427902b24a333a5f9fcb2f0b3ac41.css?v=be8a1c11" />
+      <link rel="stylesheet" type="text/css" href="../../../_static/graphviz.css?v=fd3f3429" />
+
+  
+  <!--[if lt IE 9]>
+    <script src="../../../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script src="../../../_static/jquery.js?v=5d32c60e"></script>
+        <script src="../../../_static/_sphinx_javascript_frameworks_compat.js?v=2cd50e6c"></script>
+        <script src="../../../_static/documentation_options.js?v=61304451"></script>
+        <script src="../../../_static/doctools.js?v=9a2dae69"></script>
+        <script src="../../../_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="../../../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../../../genindex.html" />
+    <link rel="search" title="Search" href="../../../search.html" />
+    <link rel="next" title="persist_spatial.network_functions" href="../network_functions/index.html" />
+    <link rel="prev" title="persist_spatial" href="../index.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+
+          
+          
+          <a href="../../../index.html" class="icon icon-home">
+            PersiST
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../../../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../../../changelog.html">Changelog</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="../../index.html">API Reference</a><ul class="current">
+<li class="toctree-l2 current"><a class="reference internal" href="../index.html">persist_spatial</a><ul class="current">
+<li class="toctree-l3 current"><a class="reference internal" href="../index.html#submodules">Submodules</a><ul class="current">
+<li class="toctree-l4 current"><a class="current reference internal" href="#">persist_spatial.compute_persistence</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../network_functions/index.html">persist_spatial.network_functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../plotting_utils/index.html">persist_spatial.plotting_utils</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../post_ph_functions/index.html">persist_spatial.post_ph_functions</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../smoothed_expression/index.html">persist_spatial.smoothed_expression</a></li>
+<li class="toctree-l4"><a class="reference internal" href="../topology_utils/index.html">persist_spatial.topology_utils</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../../../index.html">PersiST</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../../../index.html" class="icon icon-home" aria-label="Home"></a></li>
+          <li class="breadcrumb-item"><a href="../../index.html">API Reference</a></li>
+          <li class="breadcrumb-item"><a href="../index.html">persist_spatial</a></li>
+      <li class="breadcrumb-item active">persist_spatial.compute_persistence</li>
+      <li class="wy-breadcrumbs-aside">
+            <a href="../../../_sources/autoapi/persist_spatial/compute_persistence/index.rst.txt" rel="nofollow"> View page source</a>
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-persist_spatial.compute_persistence">
+<span id="persist-spatial-compute-persistence"></span><h1>persist_spatial.compute_persistence<a class="headerlink" href="#module-persist_spatial.compute_persistence" title="Link to this heading"></a></h1>
+<section id="functions">
+<h2>Functions<a class="headerlink" href="#functions" title="Link to this heading"></a></h2>
+<table class="autosummary longtable docutils align-default">
+<tbody>
+<tr class="row-odd"><td><p><a class="reference internal" href="#persist_spatial.compute_persistence.run_persistence" title="persist_spatial.compute_persistence.run_persistence"><code class="xref py py-obj docutils literal notranslate"><span class="pre">run_persistence</span></code></a>(data[, p, m, mesh_type, sensitivity, ...])</p></td>
+<td><p>Computes spatial structure scores for all variables in a spatial 'omics dataset.</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="module-contents">
+<h2>Module Contents<a class="headerlink" href="#module-contents" title="Link to this heading"></a></h2>
+<dl class="py function">
+<dt class="sig sig-object py" id="persist_spatial.compute_persistence.run_persistence">
+<span class="sig-prename descclassname"><span class="pre">persist_spatial.compute_persistence.</span></span><span class="sig-name descname"><span class="pre">run_persistence</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">pandas.DataFrame</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">int</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">2</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">m</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">0.1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">mesh_type</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">'hexagonal'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">sensitivity</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">float</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">metrics_storage_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">diagrams_storage_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_storage_location</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">notes</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">str</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_metrics</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">return_diagrams</span></span><span class="p"><span class="pre">:</span></span><span class="w"> </span><span class="n"><span class="pre">bool</span></span><span class="w"> </span><span class="o"><span class="pre">=</span></span><span class="w"> </span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#persist_spatial.compute_persistence.run_persistence" title="Link to this definition"></a></dt>
+<dd><p>Computes spatial structure scores for all variables in a spatial ‘omics dataset.</p>
+<p>Takes in expression and co-ordinate data for a set of wells from a single tissue sample and computes the Coefficient
+of spatial structure (CoSS) for each gene. Optionally stores spatial metrics (norms, ratios, ranks, and SVG calls) and
+persistence diagrams in user-specified locations.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>data</strong> (<em>pd.DataFrame</em>) – <dl class="simple">
+<dt>pandas DataFrame of the form</dt><dd><p>x , y , gene1 , gene2, … , geneN
+.   .     .       .            .
+.   .     .       .            .</p>
+</dd>
+</dl>
+<p>where (x, y) are the co-ordinates of each well, and genei is the expression of gene i in each well.</p>
+</p></li>
+<li><p><strong>p</strong> (<em>float</em><em>, </em><em>default=2</em>) – Specifies which norm of the 0D persistence diagram to use as the CoSS. Should lie in [0,infinity).</p></li>
+<li><p><strong>m</strong> (<em>float</em><em>, </em><em>default=0.1</em>) – Specifies the probability mass threshold to use in distance to measure computation. Should lie in (0,1).</p></li>
+<li><p><strong>mesh_type</strong> (<em>str</em><em>, </em><em>default='hexagonal'</em>) – Type of mesh that the well co-ordinates lie on. Allowed values are “hexagonal” or “square”.</p></li>
+<li><p><strong>sensitivity</strong> (<em>float</em><em>, </em><em>default=1</em>) – Controls the behaviour of the automatic CoSS threshold selection for declaring a gene as spatially variable.</p></li>
+<li><p><strong>metrics_storage_location</strong> (<em>str</em><em>, </em><em>default=None</em>) – Filepath specifiying where to store metrics csv file.</p></li>
+<li><p><strong>diagrams_storage_location</strong> (<em>str</em><em>, </em><em>default=None</em>) – Filepath specifiying where to store the dictionary of persistence diagrams for each gene. Stored as a pickle file.</p></li>
+<li><p><strong>log_storage_location</strong> (<em>str</em><em>, </em><em>default=None</em>) – Filepath specifying where to record details of persistence computation. Stored as a text file.</p></li>
+<li><p><strong>notes</strong> (<em>str</em><em>, </em><em>default=None</em>) – Extra text to be appended on to the log.</p></li>
+<li><p><strong>return_metrics</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to return the metrics data frame. If return_metrics=True and return_diagrams=True, both objects will be reutrned in the order (metrics, diagrams).</p></li>
+<li><p><strong>return_diagrams</strong> (<em>bool</em><em>, </em><em>default=True</em>) – Whether to return persistence diagrams what objects to return. If return_metrics=True and return_diagrams=True, both objects will be reutrned in the order (metrics, diagrams).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><em>pd.DataFrame</em> – Data frame contaning CoSS and other metrics for each gene.</p></li>
+<li><p><em>List[d.Diagram]</em> – Lost of persistence diagrams for each gene, indexed by gene name (taken from the column names of the input data frame).</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+</section>
+</section>
+
+
+           </div>
+          </div>
+          <footer><div class="rst-footer-buttons" role="navigation" aria-label="Footer">
+        <a href="../index.html" class="btn btn-neutral float-left" title="persist_spatial" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left" aria-hidden="true"></span> Previous</a>
+        <a href="../network_functions/index.html" class="btn btn-neutral float-right" title="persist_spatial.network_functions" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right" aria-hidden="true"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2025, James Boyle.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

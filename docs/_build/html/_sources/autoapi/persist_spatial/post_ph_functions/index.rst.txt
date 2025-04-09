@@ -1,0 +1,31 @@
+persist_spatial.post_ph_functions
+=================================
+
+.. py:module:: persist_spatial.post_ph_functions
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   persist_spatial.post_ph_functions.find_knee
+
+
+Module Contents
+---------------
+
+.. py:function:: find_knee(v: pandas.Series) -> float
+
+   Computes a threshold score for spatial variability.
+
+   Takes in a Series v of spatial structrue scores and returns a cutoff point to use for deciding
+   which genes are spatially variable. To be called by compute_persistence.run_persistence().
+
+   :param v: Series of CoSS's.
+   :type v: pd.Series
+
+   :returns: Threshold for declaring a gene to be Spatially Variable.
+   :rtype: float
+
+

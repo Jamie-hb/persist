@@ -1,0 +1,20 @@
+persist_spatial
+===============
+
+.. py:module:: persist_spatial
+
+
+Submodules
+----------
+
+.. toctree::
+   :maxdepth: 1
+
+   /autoapi/persist_spatial/compute_persistence/index
+   /autoapi/persist_spatial/network_functions/index
+   /autoapi/persist_spatial/plotting_utils/index
+   /autoapi/persist_spatial/post_ph_functions/index
+   /autoapi/persist_spatial/smoothed_expression/index
+   /autoapi/persist_spatial/topology_utils/index
+
+

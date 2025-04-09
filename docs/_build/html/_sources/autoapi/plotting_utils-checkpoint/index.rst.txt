@@ -1,0 +1,55 @@
+plotting_utils-checkpoint
+=========================
+
+.. py:module:: plotting_utils-checkpoint
+
+
+Functions
+---------
+
+.. autoapisummary::
+
+   plotting_utils-checkpoint.plot_many_genes
+
+
+Module Contents
+---------------
+
+.. py:function:: plot_many_genes(df: pandas.DataFrame, genes: List[str], s: float = 25, figwidth: float = 4, figheight: float = 8, numcols: int = 5, title: str = None, title_fontsize: float = 20, dpi: float = None, show_zero_wells: bool = False) -> None
+
+   Produces a figure with subplots showing the spatial expression of genes from the same tissue sample.
+
+   Produces a suplot for the expression of a specified list of genes, whose expression is contained in
+   the columns of the given data frame.
+
+   :param df:
+              pandas DataFrame of the form
+                     x , y , gene1 , gene2, ... , geneN
+                     .   .     .       .            .
+                     .   .     .       .            .
+              where (x, y) are the co-ordinates of each well, and genei is the expression of gene i in each well.
+   :type df: pd.DataFrame
+   :param genes: List of genes to make expression plots of. Each entry should be the name of a column in df.
+   :type genes: List[str]
+   :param s: Size of spots at each well. 's' parameter in sns.scatterplot().
+   :type s: float, default=25
+   :param figwidth: Width of each subplot. The width of the overall figure will then be this multiplied by the number of columns, passed as the
+                    first element of the figsize argument in plt.subplots().
+   :type figwidth: float, default=4
+   :param figheight: Height of each subplot. The height of the overall figure will then be this multiplied by the number of rows, passed as the
+                     second element of the figsize argument in plt.subplots().
+   :type figheight: float, default=8
+   :param numcols: The number of genes plotted in each row of the overal figure.
+   :type numcols: int, default=5
+   :param title: Title for the overall figure. Passed to plt.suptitle().
+   :type title: float, default=None
+   :param title_fontsize: Font size of figure title. Passed to the fontsize argument in plt.suptitle()
+   :type title_fontsize: float, default=20
+   :param dpi: Dots per inch of the overall figure, passed to the dpi parameter in plt.subplots().
+   :type dpi: float, default=None
+   :param show_zero_wells: Specify whether to plot wells with zero expression.
+   :type show_zero_wells: bool, default=False
+
+   :rtype: None
+
+
