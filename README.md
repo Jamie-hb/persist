@@ -1,4 +1,4 @@
-<img src='docs/README_images/PersiST_Logo.png' width='300' > 
+<img src='README_images/PersiST_Logo.png' width='300' > 
 
 # PersiST
 
@@ -327,7 +327,7 @@ from persist_spatial.plotting_utils import plot_many_genes
 plot_many_genes(df, list(metrics.gene)[:20])
 ```
 
-![png](docs/README_images/kpmp_svgs.png)
+![png](README_images/kpmp_svgs.png)
 
 We can see that PersiST effectively surfaces those genes with notable spatial structure.
 
@@ -342,7 +342,7 @@ For example, we plot group of genes all expressed in the glomeruli of this parti
 plot_many_genes(df, ['PODXL', 'PTGDS', 'IGFBP5', 'TGFBR2', 'IFI27', 'HTRA1'], numcols=3)
 ```
 
-![png](docs/README_images/podxl_svgs.png)
+![png](README_images/podxl_svgs.png)
 
 # Differential Spatial Expression Testing
 
