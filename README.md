@@ -327,7 +327,7 @@ from persist_spatial.plotting_utils import plot_many_genes
 plot_many_genes(df, list(metrics.gene)[:20])
 ```
 
-![png](README_images/kpmp_svgs.png)
+![png](https://github.com/Jamie-hb/persist/blob/main/README_images/kpmp_svgs.png)
 
 We can see that PersiST effectively surfaces those genes with notable spatial structure.
 
