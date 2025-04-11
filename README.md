@@ -12,7 +12,7 @@ PersiST can be installed using pip:
 
 # Documentation 
 
-PersiST's documentation can be found (https://persist-spatial.readthedocs.io/en/latest/)[here].
+PersiST's documentation can be found [here](https://persist-spatial.readthedocs.io/en/latest/).
 
 # Tutorial
 
